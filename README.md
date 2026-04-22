@@ -192,11 +192,6 @@ git clone https://github.com/username/project-nexus.git
 cd project-nexus
 ```
  
-### 2. Instalacija ovisnosti
- 
-```bash
-pip install -r requirements.txt
-```
  
 ### 3. Pokretanje analize
  
