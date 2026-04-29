@@ -74,25 +74,25 @@ df = df[(df["ph"] > 3) & (df["ph"] < 10)]
  
 Analiza uključuje vizualnu interpretaciju ključnih parametara.
  
-### Korelacija varijabli
+### Odnos temperature i vlage
  
-![Korelacija](assets/graf_1.png)
+![Temp_h2o](assets/graf_1.png)
  
 Analiza pokazuje povezanost između koncentracije metana i dubine uzoraka.
  
 ---
  
-### Toplinska mapa terena
+### Planiranje dubine bušenja
  
-![Toplinska mapa](assets/graf_2.png)
+![Dubina_bušenja](assets/graf_2.png)
  
 Vizualizira varijacije dubine i temperature, omogućujući identifikaciju sigurnih ruta.
  
 ---
  
-### Satelitska mapa (GPS projekcija)
+### Detekcija metana po lokacijama
  
-![Satelitska mapa](assets/graf_3.png)
+![Detekcija_metana_lok](assets/graf_3.png)
  
 Korišten je koncept **extent mapiranja** za precizno pozicioniranje podataka na stvarne koordinate.
  
@@ -102,7 +102,7 @@ Ova metoda omogućuje:
 * precizno mapiranje terena
 * optimizaciju putanje robota
  
- ## Klaster uzroka 
+ ## Scatter plot
 
  ![Idealni_kandidati_mapa](assets/graf_4.png)
 
@@ -110,7 +110,7 @@ Ova metoda omogućuje:
 
 Graf pokazuje klastere uzoraka, dok su crvenim zvjezdicama označeni kandidati sa potencijalno visokom koncentracijom metana i organskih molekula.
 
-## Idealni_kandidati_mapa_pozadina]
+## Sccater-plot mapa pozadina
 
  ![Idealni_kandidati_pozadina_mapa](assets/jezero_mission_map.jpg)
 
