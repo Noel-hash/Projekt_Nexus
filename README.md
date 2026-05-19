@@ -112,7 +112,7 @@ Graf pokazuje klastere uzoraka, dok su crvenim zvjezdicama označeni kandidati s
 
 ## Sccater-plot mapa pozadina
 
- ![Idealni_kandidati_pozadina_mapa](assets/jezero_mission_map.jpg)
+ ![Idealni_kandidati_pozadina_mapa](assets/misijska_karta_jezero.jpg)
 
  Analiza prikazuje raspored uzoraka po GPS koordinatama na pozadini mape Marsa i izdvojene idealne lokacije za dalju analizu.
 
