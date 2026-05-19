@@ -16,7 +16,7 @@ df_spajanje = pd.merge(df_lokacije, df_uzorci, on='ID_Uzorka')
 
 df_notemp = df_spajanje[df_spajanje['Temp_Tla_C'] != 150.0]
 
-df_cisto = df_notemp[df_notemp['H2O_Postotak'].astype(str).str.len() < 6].copy()
+df_cisto = df_noteap[df_notemp['H2O_Postotak'].astype(str).str.len() < 6].copy()
 
 df_cisto['H2O_Postotak'] = pd.to_numeric(df_cisto['H2O_Postotak'])
 
@@ -55,100 +55,42 @@ plt.title("Detekcija metana po lokacijama")
 plt.savefig('graf_3.png')
 
 # Graf 4
-
 plt.figure(figsize=(10, 6))
-
 sns.scatterplot(data=df_cisto, x='GPS_LONG', y='GPS_LAT', hue='H2O_Postotak')
-
 plt.scatter(kandidati['GPS_LONG'], kandidati['GPS_LAT'],
-
             marker='*', s=250, color='red', label='Kandidati (Org. molekule + Metan)')
-
 plt.legend()
-
 plt.title("Lokacije idealnih kandidata za analizu")
-
 plt.savefig('graf_4.png')
+plt.close()
 
-
+# Graf 5
 plt.figure(figsize=(12, 8))
 
-
-extent_koordinate = [
-
+granice = [
     df_cisto['GPS_LONG'].min(), df_cisto['GPS_LONG'].max(),
-
     df_cisto['GPS_LAT'].min(), df_cisto['GPS_LAT'].max()
-
 ]
 
-try:
+slika = plt.imread("jezero_crater_satellite_map.jpg")
+plt.imshow(slika, extent=granice, aspect="auto", alpha=0.7)
 
-    slika_kratera = plt.imread('jezero_crater_satellite_map.jpg')
+sns.scatterplot(data=df_cisto, x="GPS_LONG", y="GPS_LAT", alpha=0.3, label="Uzorci")
 
-    plt.imshow(slika_kratera, extent=extent_koordinate, aspect='auto', alpha=0.7)
+plt.scatter(
+    kandidati["GPS_LONG"],
+    kandidati["GPS_LAT"],
+    marker="*",
+    s=250,
+    color="red",
+    label="Kandidati za bušenje"
+)
 
-    sns.scatterplot(data=df_cisto, x='GPS_LONG', y='GPS_LAT', alpha=0.4, color='white', edgecolor='black')
+plt.legend()
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+plt.title("Misijska karta - Jezero krater")
 
-    plt.title("Navigacijska mapa: Krater Jezero")
+plt.savefig("misijska_karta_jezero.jpg", dpi=200)
 
-except FileNotFoundError:
-
-    print("Upozorenje: Datoteka slike nije pronađena, graf će biti bez pozadine.")
-
-    sns.scatterplot(data=df_cisto, x='GPS_LONG', y='GPS_LAT')
-
-plt.savefig('jezero_mission_map.jpg')
-
-
-nalozi_lista = []
-
-
-for index, redak in kandidati.iterrows():
-
-    nalog = {
-
-        "id_uzorka": int(redak['ID_Uzorka']),
-
-        "koordinate": {
-
-            "lat": float(redak['GPS_LAT']),
-
-            "long": float(redak['GPS_LONG'])
-
-        },
-
-        "akcije": ["NAVIGACIJA", "SONDIRANJE", "SLANJE_PODATAKA"]
-
-    }
-
-    nalozi_lista.append(nalog)
-
-"""
-
-paket = {
-
-    "misija": "Nexus",
-
-    "kandidati_count": len(nalozi_lista),
-
-    "nalozi": nalozi_lista
-
-}
-
-
-response = requests.post(url_webhook, json=paket)
-
-if response.status_code == 200:
-
-    print("--- MISIJA USPJEŠNO IZVRŠENA ---")
-
-    print(f"Statusni kod: {response.status_code}")
-
-    print(f"Broj poslanih kandidata: {len(nalozi_lista)}")
-
-else:
-
-    print(f"Došlo je do problema. Status: {response.status_code}")
-
-"""
+plt.close()
